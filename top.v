@@ -65,6 +65,9 @@ module top (
 	- what docs to give
 	- how much can I do on my own so I can take out credit to Northeastern
 	*/
+	instr_memory InstrMem (
+		.clk(clk), .addr(pc), .instr(instruction)
+	);
 
 	instr_decoder InstrDec (
 		.instruction(instruction), .RegWrite(RegWrite), .RegDst(RegDst),
