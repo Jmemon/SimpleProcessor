@@ -46,7 +46,7 @@ module top (
 	alu_regfile ALU_RegFile (
 		.clk(clk), .rst(rst), .wr_en(RegWrite),
 		.wr_addr(rf_waddr), .wr_data(rf_wdata), 
-		.rd0_addr(rs_addr), .rd1_addr(rt_addr), .intr_i(immediate),
+		.rd0_addr(rs_addr), .rd1_addr(rt_addr), .instr_i(immediate),
 		.alu_op(ALU_op), .alu_s0(ALUSrc1), .alu_s1(ALUSrc2),
 		.f(ALU_out), .ovf(ALU_ovf), .take_branch(ALU_tb),
 		.alu_in0(ALU_in1), .alu_in1(ALU_in2), 
@@ -66,7 +66,7 @@ module top (
 	- how much can I do on my own so I can take out credit to Northeastern
 	*/
 	instr_memory InstrMem (
-		.clk(clk), .addr(pc), .instr(instruction)
+		.addr(pc), .instr(instruction)
 	);
 
 	instr_decoder InstrDec (
@@ -84,7 +84,7 @@ module top (
 
 	// Registers to Use in Always Blocks
 	reg [8:0] WriteData;
-	reg [8:0] WriteAddr;
+	reg [1:0] WriteAddr;
 
 	assign rf_wdata = WriteData;
 	assign rf_waddr = WriteAddr;
@@ -92,16 +92,16 @@ module top (
 	// MUX for rf_wdata
 	always @(*) begin
 		case (MemToReg)
-			1'b0: WriteData <= {ALU_ovf, ALU_out};
-			1'b1: WriteData <= data_mem_out;
+			1'b0: WriteData = {ALU_ovf, ALU_out};
+			1'b1: WriteData = data_mem_out;
 		endcase
 	end
 
 	// MUX for rf_waddr
 	always @(*) begin
 		case (RegDst)
-			1'b0: WriteAddr <= rt_addr;
-			1'b1: WriteAddr <= rd_addr;
+			1'b0: WriteAddr = rt_addr;
+			1'b1: WriteAddr = rd_addr;
 		endcase
 	end
 

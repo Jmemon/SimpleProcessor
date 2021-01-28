@@ -1,19 +1,25 @@
+`timescale 1ns / 1ps
+
 module programcounter(input clk, input rst, input [7:0] immediate, 
 	     	      input take_branch, output [7:0] pc
 	);
 
-	reg [7:0] PC = 8'b0;
-	assign pc = PC;
+	reg [7:0] pcount = 8'b0; 
+	assign pc = pcount;
+
+	// if (pcount == 255) $finish();
+
+	// #1000000000000; $finish();
 
 	always @(posedge clk, posedge rst, posedge take_branch) begin
 		if (rst) begin
-			PC <= 8'b0;
+			pcount <= 8'b0;
 		end
 		else if (take_branch) begin
-			PC <= PC + immediate;
+			pcount <= pcount + immediate;
 		end
 		else if (clk) begin
-			PC <= PC + 1;
+			pcount <= pcount + 1;
 		end
 	end
 

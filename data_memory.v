@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module data_memory(input clk, input rst, input we,
     input [7:0] a, input [8:0] d, output [8:0] spo);
     
@@ -8,7 +10,7 @@ module data_memory(input clk, input rst, input we,
     
     initial begin
         for (i=0; i<256; i=i+1) begin
-            mem[i] <= 8'd0;
+            mem[i] = 9'd0;
         end
     end
     
@@ -16,7 +18,7 @@ module data_memory(input clk, input rst, input we,
     always @(posedge rst, posedge clk) begin
         if (rst) begin
             for (i=0; i<256; i=i+1) begin
-                mem[i] <= 8'd0;
+                mem[i] = 9'd0;
             end
         end else if (we) begin
             mem[a] <= d;

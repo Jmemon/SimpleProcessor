@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module instr_decoder(input [15:0] instruction, output RegWrite, output RegDst, 
                      output [7:0] instr_i, output ALUSrc1, output ALUSrc2, output [2:0] ALUOp, 
                      output MemWrite, output [3:0] opcode, output MemToReg, 

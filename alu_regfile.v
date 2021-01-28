@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module alu_regfile(input clk, input rst, input wr_en, 
                    input [1:0] wr_addr, input [8:0] wr_data,
                    input [1:0] rd0_addr, input [1:0] rd1_addr, 
@@ -25,12 +27,12 @@ module alu_regfile(input clk, input rst, input wr_en,
        
     always @(*) begin
         case (alu_s0) 
-            0: in0 <= rd0_data[7:0];
-            1: in0 <= 8'd0;
+            0: in0 = rd0_data[7:0];
+            1: in0 = 8'd0;
         endcase
         case (alu_s1)
-            0: in1 <= rd1_data[7:0];
-            1: in1 <= instr_i;
+            0: in1 = rd1_data[7:0];
+            1: in1 = instr_i;
         endcase
     end
                             

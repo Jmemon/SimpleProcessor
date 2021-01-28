@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module alu8(input [7:0] a, input [7:0] b, input [2:0] sel,
                     output [7:0] f, output ovf, output take_branch);
     

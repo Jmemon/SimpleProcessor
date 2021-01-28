@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module reg_file(input clk, input rst, input wr_en, 
     input [1:0] wr_addr, input [8:0] wr_data,
     input [1:0] rd0_addr, input [1:0] rd1_addr, 
@@ -31,10 +33,10 @@ module reg_file(input clk, input rst, input wr_en,
             reg3 = 9'd0;
         end else if (wr_en) begin
             case (wr_addr)
-                2'd0: reg0 <= wr_data;
-                2'd1: reg1 <= wr_data;
-                2'd2: reg2 <= wr_data;
-                2'd3: reg3 <= wr_data;
+                2'd0: reg0 = wr_data;
+                2'd1: reg1 = wr_data;
+                2'd2: reg2 = wr_data;
+                2'd3: reg3 = wr_data;
             endcase
         end
     end
