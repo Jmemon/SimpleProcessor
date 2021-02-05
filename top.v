@@ -42,6 +42,10 @@ module top (
 	// Program Counter
 	wire [7:0] pc;
 
+	initial begin
+		$display("[%0t] Model Running...\n", $time);
+	end
+
 	// Instantiate Modules
 	alu_regfile ALU_RegFile (
 		.clk(clk), .rst(rst), .wr_en(RegWrite),

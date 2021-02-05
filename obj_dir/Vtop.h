@@ -43,6 +43,7 @@ VL_MODULE(Vtop) {
     SData/*8:0*/ top__DOT__ALU_RegFile__DOT__regFile__DOT__reg2;
     SData/*8:0*/ top__DOT__ALU_RegFile__DOT__regFile__DOT__reg3;
     IData/*31:0*/ top__DOT__DataMem__DOT__i;
+    IData/*31:0*/ top__DOT__InstrMem__DOT__i;
     IData/*22:0*/ top__DOT__InstrDec__DOT__settings;
     SData/*8:0*/ top__DOT__DataMem__DOT__mem[256];
     SData/*15:0*/ top__DOT__InstrMem__DOT__i_mem[256];

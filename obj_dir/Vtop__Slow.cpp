@@ -32,6 +32,8 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_initial__TOP__1\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
+    VL_WRITEF("[%0t] Model Running...\n\n",64,(0x3e8ULL 
+                                               * (QData)(VL_TIME_UNITED_Q(1000))));
     vlTOPp->top__DOT__ALU_RegFile__DOT__regFile__DOT__reg0 = 0U;
     vlTOPp->top__DOT__ALU_RegFile__DOT__regFile__DOT__reg1 = 0U;
     vlTOPp->top__DOT__ALU_RegFile__DOT__regFile__DOT__reg2 = 0U;
@@ -39,6 +41,13 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     VL_READMEM_N(true, 16, 256, 0, std::string("code.dat")
                  , vlTOPp->top__DOT__InstrMem__DOT__i_mem
                  , 0, ~0ULL);
+    vlTOPp->top__DOT__InstrMem__DOT__i = 0U;
+    while (VL_GTS_III(1,32,32, 0x100U, vlTOPp->top__DOT__InstrMem__DOT__i)) {
+        VL_WRITEF("%x\n",16,vlTOPp->top__DOT__InstrMem__DOT__i_mem
+                  [(0xffU & vlTOPp->top__DOT__InstrMem__DOT__i)]);
+        vlTOPp->top__DOT__InstrMem__DOT__i = ((IData)(1U) 
+                                              + vlTOPp->top__DOT__InstrMem__DOT__i);
+    }
     vlTOPp->top__DOT__DataMem__DOT__i = 0U;
     while (VL_GTS_III(1,32,32, 0x100U, vlTOPp->top__DOT__DataMem__DOT__i)) {
         vlTOPp->top__DOT__DataMem__DOT__mem[(0xffU 
@@ -480,6 +489,7 @@ void Vtop::_ctor_var_reset() {
     for (int __Vi0=0; __Vi0<256; ++__Vi0) {
         top__DOT__DataMem__DOT__mem[__Vi0] = VL_RAND_RESET_I(9);
     }
+    top__DOT__InstrMem__DOT__i = VL_RAND_RESET_I(32);
     for (int __Vi0=0; __Vi0<256; ++__Vi0) {
         top__DOT__InstrMem__DOT__i_mem[__Vi0] = VL_RAND_RESET_I(16);
     }

@@ -7,10 +7,6 @@ module programcounter(input clk, input rst, input [7:0] immediate,
 	reg [7:0] pcount = 8'b0; 
 	assign pc = pcount;
 
-	// if (pcount == 255) $finish();
-
-	// #1000000000000; $finish();
-
 	always @(posedge clk, posedge rst, posedge take_branch) begin
 		if (rst) begin
 			pcount <= 8'b0;
